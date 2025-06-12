@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <link rel="stylesheet" href="./_css/style.css">
+</head>
+<body>
+<!--contenedor general de la pagina -->
+ <div class="container">
+ <h1>Formulario avanzado</h1>
+<!--barra de la pagina -->
+<div class="progreso-formulario">
+    <div class="barra-progreso" id="barra-progreso"></div>
+</div>
+<p style="text-align: center; color: #666; margin-bottom: 30 px;">
+    progreso:<span id="porcentajeProgreso">0%</span><!--etiqueta para colocar contenidos extras -->
+</p>
+
+<!--formulario-->
+<form id="formularioAvanzado" novalidate><!--el atributo no valida significa que se debe desactivar -->
+    <div class="from-group">
+        <label for="nombreCompleto">Nombre completo *</label><!--indica que el campo debe ser obligatorio -->
+        <input type="text" id="nombreCompleto" required autofocus placeholder="Minimo dos nombres" pattern="[A-Za-zÀÈÌÒÙàèìòùÑñ]{2,} [A-Za-zÀÈÌÒÙàèìòùÑñ]{3,40}">
+        <div class="mensaje-error" id="errorNombre"></div>
+        <div class="mensaje-exito" id="exitoNombre"></div>
+    </div>
+     <div class="from-group">
+        <label for="correo">Correo electronico *</label>
+        <input type="email" id="correo" required placeholder="usuario@dominio.com" pattern="^[w-\]+@([\w-]+\.)+[\w-]{5,50}$">
+        <div class="mensaje-error" id="errorCorreo"></div>
+        <div class="mensaje-exito" id="exitoCorreo"></div>
+    </div>
+    
+    <div class="form-group">
+        <label for="confirmarCorreo">Confirmar correo</label>
+          <input type="email" id="confirmarCorreo" name="confirmarCorreo" required placeholder="Confirme su correo" oncopy="return false" onpaste="return false"/>  
+          <div class="mensaje-error" id="errorConfirmarCorreo"></div>
+          <div class="mensaje-exito" id="exitoConfirmarCorreo"></div>
+            </div>
+    <div class="from-group">
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" required placeholder="Minimo 8 caracteres" minlength="8">
+        <div class="password-strenghitd" id="errorPassword"></div>
+        <div class="mensaje-error" id="errorPassword"></div>
+        <div class="mensaje-exito" id="exitoPassword"></div>
+    </div>
+
+    <div class="from-group">
+        <label for="password">Confirmaciòn De Contraseña * </label>
+        <input type="password" id="confirmarpassword" name="confirmarpassword" required placeholder="Repite tu Contraseña">
+        <div class="mensaje-error" id="errorPassword"></div>
+        <div class="mensaje-exito" id="exitoPassword"></div>
+    </div>
+
+
+    <div class="from-group">
+        <label for="fechaNacimiento">Fecha Nacimiento * </label>
+        <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+        <div class="mensaje-error" id="errorFecha"></div>
+        <div class="mensaje-exito" id="exitoFecha"></div>
+    </div>
+
+
+
+    <div class="from-group">
+        <label for="comentarios">comentarios*</label>
+        <textarea id="comentarios" name="comentarios" rows="4" maxlength="500" placeholder="Cuentanos sobre ti(minimo 500 caracteres)"></textarea>
+        <div class="contenedor-caracteres">
+            <span id="contenedor-comentarios">0</span>/500
+        </div>
+
+
+    </div> 
+
+     <div class="form-group">
+    <button type="submit" class="btn-enviar">Enviar Formulario</button>
+</div>
+<!-- Términos y condiciones -->
+<div class="form-group">
+    <input type="checkbox" id="terminos" name="terminos" required />
+    <label for="terminos" style="display: inline; margin-left: 8px">Acepto los términos y condiciones * </label>
+    
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("formularioAvanzado");
+    const nombre = form.nombreCompleto;
+    const correo = form.correo;
+    const confirmarCorreo = form.confirmarCorreo;
+    const contraseña = form.password;
+    const confirmarContraseña = form.confirmarpassword;
+
+    // Validar nombre
+    function validarNombre() {
+        const regex = /^[A-Za-zÀÈÌÒÙàèìòùÑñ]{2,} [A-Za-zÀÈÌÒÙàèìòùÑñ]{3,40}$/;
+        if (nombre.value.trim() === "") {
+            mostrarError(nombre, "Este campo es obligatorio");
+            return false;
+        } else if (!regex.test(nombre.value.trim())) {
+            mostrarError(nombre, "Formato incorrecto (min. dos nombres)");
+            return false;
+        } else {
+            ocultarError(nombre);
+            mostrarExito(nombre);
+            return true;
+        }
+    }
+
+    // Validar correo
+    function validarCorreo() {
+        const regex = /^[\w\-.]+@([\w\-]+\.)+[\w\-]{5,50}$/;
+        if (correo.value.trim() === "") {
+            mostrarError(correo, "Correo obligatorio");
+            return false;
+        } else if (!regex.test(correo.value.trim())) {
+            mostrarError(correo, "Formato de correo inválido");
+            return false;
+        } else {
+            ocultarError(correo);
+            mostrarExito(correo);
+            return true;
+        }
+    }
+
+    
+    // Validar contraseña
+    function validarContraseña() {
+        const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+        if (contraseña.value.trim() === "") {
+            mostrarError(contraseña, "Contraseña obligatoria");
+            return false;
+        } else if (!regex.test(contraseña.value.trim())) {
+            mostrarError(contraseña, "Mínimo 8 caracteres, una letra y un número");
+            return false;
+        } else {
+            ocultarError(contraseña);
+            mostrarExito(contraseña);
+            return true;
+        }
+    }
+
+
+});
+</script>
+
+
+
+</body>
+</html>

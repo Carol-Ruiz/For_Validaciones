@@ -9,17 +9,15 @@ body {
 
 }
 
-/*estili del div*/
-
 .container {
-   background-color: rgb(230, 213, 213);
-   padding: 40px;
-   border-radius: 15px;
-   box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.2);
-
+    background-color: rgb(230, 213, 213);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.2);
+    border: 3px solid #081331; 
 }
 
-/* estilo aplicado al progreso del formulario*/
+
 
 .progreso-formulario {
     width: 100%;
@@ -27,7 +25,7 @@ body {
     background-color: #e1e5e9;
     border-radius: 3px;
     margin-bottom: 30px;
-    overflow: hidden;/*se usa paara controlar el exceso del contenido, cuando sobrepasa el contenedor*/
+    overflow: hidden;/*se usa para controlar el exceso del contenido, cuando sobrepasa el contenedor*/
 
 }
 
@@ -94,6 +92,79 @@ input.invalido:focus, select.invalido:focus, textarea.invalido:focus {
 
 }
 
+.btn-enviar {
+    background-color: #4caf50;
+    color: white;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Mensajes de error */
+.mensaje-error {
+  color: #dc3545;
+  font-size: 0.85rem;
+  margin-top: 5px;
+  display: none;
+  animation: slideDown 0.3s ease;
+}
+.mensaje-exito {
+    display: none;
+    animation: slideDown 0.3s ease;
+  }
+  
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+  
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  /* Estilos para la barra de fortaleza de la contraseña */
+.password-strength {
+  width: 100%;
+  height: 10px;
+  background-color: #ddd;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.strength-level {
+  height: 100%;
+  width: 0;
+  border-radius: 5px;
+  transition: width 0.3s;
+}
+
+.strength-text {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #0a0369;
+}
+
+.strength-weak {
+  background-color: red;
+}
+
+.strength-medium {
+  background-color: orange;
+}
+
+.strength-strong {
+  background-color: rgb(23, 196, 101);
+}
+
+.strength-very-strong {
+  background-color: green;
+}
 
 .btn-enviar {
     background-color: #4caf50;
@@ -133,3 +204,10 @@ button:disabled{
     background-color: #ccc;
     cursor: not-allowed;
 }  
+
+.contador-caracteres{
+    font-size: 0.8rem;
+    color:#666;
+    text-align: right;
+    margin-top: 5px;
+}
